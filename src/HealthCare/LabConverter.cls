@@ -1,7 +1,14 @@
 Class HealthCare.LabConverter
 {
 
-ClassMethod Convert(value As %Numeric, fromUnit As %String, toUnit As %String) As %String
+/// Convert lab values between various units
+/// Supported conversions:
+/// - Glucose: mg/dL <-> mmol/L
+/// - Creatinine: mg/dL <-> µmol/L
+/// Example usage:
+///    set result = ##class(HealthCare.LabConverter).Convert(100, "mg/dL", "mmol/L")
+///    write result  ; Output: 5.549944
+ClassMethod Convert(value As %Numeric, fromUnit As %String, toUnit As %String) As %Numeric
 {
     // Normalize units to lowercase
     set fromUnit = $ZConvert(fromUnit, "L")
@@ -69,6 +76,7 @@ ClassMethod ConvertCreatinine(value As %Numeric, fromUnit As %String, toUnit As 
     }
 }
 
+/// check if both units are valid glucose units
 ClassMethod IsGlucoseUnit(fromUnit As %String, toUnit As %String) As %Boolean
 {
     // Supported glucose units
@@ -78,6 +86,7 @@ ClassMethod IsGlucoseUnit(fromUnit As %String, toUnit As %String) As %Boolean
     return ($ListFind(glucoseUnits, fromUnit) > 0) && ($ListFind(glucoseUnits, toUnit) > 0)
 }
 
+/// check if both units are valid creatinine units
 ClassMethod IsCreatinineUnit(fromUnit As %String, toUnit As %String) As %Boolean
 {
     // Supported creatinine units

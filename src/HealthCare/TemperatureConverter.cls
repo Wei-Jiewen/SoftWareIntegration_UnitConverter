@@ -1,7 +1,12 @@
 Class HealthCare.TemperatureConverter
 {
 
-ClassMethod ConvertTemperature(value As %Numeric, fromUnit As %String, toUnit As %String) As %String
+/// convert temperature between Celsius, Fahrenheit, and Kelvin
+/// Supported units: "C", "F", "K"
+/// Example usage:
+///    set result = ##class(HealthCare.TemperatureConverter).ConvertTemperature(100, "C", "F")
+///    write result  ; Output: 212
+ClassMethod ConvertTemperature(value As %Numeric, fromUnit As %String, toUnit As %String) As %Numeric
 {
     // normalize units to lowercase
     set fromUnit = $ZConvert(fromUnit, "L")

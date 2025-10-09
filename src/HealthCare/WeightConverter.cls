@@ -1,7 +1,11 @@
 Class HealthCare.WeightConverter
 {
 
-ClassMethod ConvertWeight(value As %Numeric, fromUnit As %String, toUnit As %String) As %String
+/// Summary: Class for converting weight units in healthcare context
+/// g, kg, mg, lb, oz
+///    set result = ##class(HealthCare.WeightConverter).ConvertWeight(150, "lb", "kg")
+///    write result  ; Output: 68.0388
+ClassMethod ConvertWeight(value As %Numeric, fromUnit As %String, toUnit As %String) As %Numeric
 {
     // normalize units to lowercase
     set fromUnit = $ZConvert(fromUnit, "L")

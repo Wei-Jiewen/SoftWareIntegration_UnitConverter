@@ -1,7 +1,14 @@
 Class HealthCare.UnitConverterMain
 {
 
-ClassMethod Convert(value As %Numeric, fromUnit As %String, toUnit As %String, category As %String = "") As %String
+/// Summary: Main class for unit conversion in healthcare context
+/// length, weight, temperature, lab values
+/// category: length, weight, temperature, lab
+/// It routes conversion requests to specialized classes based on the category of units
+/// Example usage:
+///    set result = ##class(HealthCare.UnitConverterMain).Convert(100, "cm", "m", "length")
+///    write result  ; Output: 1
+ClassMethod Convert(value As %Numeric, fromUnit As %String, toUnit As %String, category As %String = "") As %Numeric
 {
    
     // Validate inputs
@@ -42,7 +49,7 @@ ClassMethod ValidateInputs(value As %Numeric, fromUnit As %String, toUnit As %St
     return 1
 }
 
-ClassMethod PerformConversion(value As %Numeric, fromUnit As %String, toUnit As %String, category As %String) As %String
+ClassMethod PerformConversion(value As %Numeric, fromUnit As %String, toUnit As %String, category As %String) As %Numeric
 {
     // route to appropriate conversion method based on category
     quit $Case(category,

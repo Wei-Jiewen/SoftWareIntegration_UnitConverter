@@ -1,7 +1,12 @@
 Class HealthCare.LengthConverter
 {
 
-ClassMethod ConvertLength(value As %Numeric, fromUnit As %String, toUnit As %String) As %String
+/// Convert length between various units
+/// mm, cm, m, km, in, ft, yd
+/// Example usage:
+///    set result = ##class(HealthCare.LengthConverter).Convert(100, "cm", "m")
+///    write result  ; Output: 1
+ClassMethod ConvertLength(value As %Numeric, fromUnit As %String, toUnit As %String) As %Numeric
 {
     // normalize units to lowercase
     set fromUnit = $ZConvert(fromUnit, "L")
