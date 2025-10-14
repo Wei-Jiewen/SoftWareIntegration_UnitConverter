@@ -4,36 +4,40 @@ Class HealthCare.TemperatureConverter
 /// convert temperature between Celsius, Fahrenheit, and Kelvin
 /// Supported units: "C", "F", "K"
 /// Example usage:
-///    set result = ##class(HealthCare.TemperatureConverter).ConvertTemperature(100, "C", "F")
-///    write result  ; Output: 212
-ClassMethod ConvertTemperature(value As %Numeric, fromUnit As %String, toUnit As %String) As %Numeric
+///    set result = ##class(HealthCare.TemperatureConverter).ConvertTemperature(100, "c", "f")
+///    write result ; Output: 212
+ClassMethod Convert(value As %String, fromUnit As %String, toUnit As %String) As %String
 {
-    // normalize units to lowercase
-    set fromUnit = $ZConvert(fromUnit, "L")
-    set toUnit = $ZConvert(toUnit, "L")
+    set numericValue = +value
     
     // Convert to Celsius first
     set celsiusValue = ""
     if fromUnit = "c" {
-        set celsiusValue = value
+        set celsiusValue = numericValue
     } elseif fromUnit = "f" {
-        set celsiusValue = (value - 32) * 5 / 9
+        set celsiusValue = (numericValue - 32) * 5 / 9
     } elseif fromUnit = "k" {
-        set celsiusValue = value - 273.15
+        set celsiusValue = numericValue - 273.15
     } else { 
         return "Error: Unsupported temperature unit: "_fromUnit
     }
 
     // Convert from Celsius to target unit
     if toUnit = "c" {
-        return $Normalize(celsiusValue,6)
+        return celsiusValue
     } elseif toUnit = "f" {
-        return $Normalize((celsiusValue * 9 / 5) + 32,6)
+        return (celsiusValue * 9 / 5) + 32
     } elseif toUnit = "k" {
-        return $Normalize(celsiusValue + 273.15,6)
+        return celsiusValue + 273.15
     } else {
         return "Error: Unsupported temperature unit: "_toUnit
     }
+}
+
+ClassMethod GetSupportedUnits() As %String
+{
+    set units = $lb("c", "f","k")
+    return $lts(units, ", ")
 }
 
 }

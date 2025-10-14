@@ -3,97 +3,95 @@ Class HealthCare.LabConverter
 
 /// Convert lab values between various units
 /// Supported conversions:
-/// - Glucose: mg/dL <-> mmol/L
-/// - Creatinine: mg/dL <-> µmol/L
+/// - Glucose: mg/d <-> mmol/
+/// - Creatinine: mg/d <-> µmol/
+/// - Cholesterol：mg/d <-> mmol/
 /// Example usage:
-///    set result = ##class(HealthCare.LabConverter).Convert(100, "mg/dL", "mmol/L")
-///    write result  ; Output: 5.549944
-ClassMethod Convert(value As %Numeric, fromUnit As %String, toUnit As %String) As %Numeric
+///    set result = ##class(HealthCare.LabConverter).Convert(100, "mg/dl", "mmol/l","glucose")
+///    write result; Output: 5.549943945566149782
+ClassMethod Convert(value As %String, fromUnit As %String, toUnit As %String, testItem As %String) As %String
 {
-    // Normalize units to lowercase
-    set fromUnit = $ZConvert(fromUnit, "L")
-    set toUnit = $ZConvert(toUnit, "L")
-
-    // route to appropriate conversion method based on units
-    if ..IsGlucoseUnit(fromUnit, toUnit) {
-        return ..ConvertGlucose(value, fromUnit, toUnit)
-    } elseif ..IsCreatinineUnit(fromUnit, toUnit) {
-        return ..ConvertCreatinine(value, fromUnit, toUnit)
-    } else {
-        return "Error: Unsupported unit conversion from "_fromUnit_" to "_toUnit
+    // Check if testItem is provided
+    if (testItem =""){
+        return "Error:testItem is required for lab conversion"
     }
+    return ..PerformConversion(value,fromUnit,toUnit,testItem)
 }
 
-ClassMethod ConvertGlucose(value As %Numeric, fromUnit As %String, toUnit As %String) As %Numeric
+ClassMethod PerformConversion(value As %String, fromUnit As %String, toUnit As %String, testItem As %String) As %String
 {
-    // Normalize units to lowercase
-    set fromUnit = $ZConvert(fromUnit, "L")
-    set toUnit = $ZConvert(toUnit, "L")
+    // Convert input value to numeric
+    set numericValue = +value
 
-    // Convert to mg/dL (base unit) first
-    set valueInMgPerDl = 0
-    if fromUnit = "mg/dl" {
-        set valueInMgPerDl = value
-    } elseif fromUnit = "mmol/l" {
-        set valueInMgPerDl = value * 18.0182
-    } else {
-        return "Error: Unsupported glucose unit "_fromUnit
-    }
+    do ..InitiallizeRatio(.ratio)
 
-    // Convert from base unit to target unit
-    if toUnit = "mg/dl" {
-        return $Normalize(valueInMgPerDl, 6)
-    } elseif toUnit = "mmol/l" {
-        return $Normalize(valueInMgPerDl / 18.0182, 6)
-    } else {
-        return "Error: Unsupported glucose unit "_toUnit
+    // Validate units are supported for the testItem
+    if ('$Data(ratio(testItem, fromUnit))) {
+        return "Error: Unsupported "_testItem_" unit: "_fromUnit
     }
+    if ('$Data(ratio(testItem, toUnit))) {
+        return "Error: Unsupported "_testItem_" unit: "_toUnit
+    }
+    // Convert to base unit then to target unit
+    set baseValue = numericValue /ratio(testItem,fromUnit)
+    set result = baseValue * ratio(testItem,toUnit)
+    return result
 }
 
-ClassMethod ConvertCreatinine(value As %Numeric, fromUnit As %String, toUnit As %String) As %Numeric
+ClassMethod InitiallizeRatio(Output ratio) As %Status
 {
-    // normalize units to lowercase
-    set fromUnit = $ZConvert(fromUnit, "L")
-    set toUnit = $ZConvert(toUnit, "L")
-
-    // convert to mg/dL (base unit) first
-    set valueInMgPerDl = 0
-    if fromUnit = "mg/dl" {
-        set valueInMgPerDl = value
-    } elseif fromUnit = "umol/l" {
-        set valueInMgPerDl = value / 88.4
-    } else {
-        return "Error: Unsupported creatinine unit "_fromUnit
-    }
-
-    // Convert from base unit to target unit
-    if toUnit = "mg/dl" {
-        return valueInMgPerDl
-    } elseif toUnit = "umol/l" {
-        return valueInMgPerDl * 88.4
-    } else {
-        return "Error: Unsupported creatinine unit "_toUnit
-    }
+    kill ratio
+    
+    // Glucose
+    // 1 mmol/L = 18.0182 mg/dL
+    set ratio("glucose", "mg/dl") = 18.0182
+    set ratio("glucose", "mmol/l") = 1
+    
+    // Creatinine
+    // 1 mg/dL = 88.4 µmol/L
+    set ratio("creatinine", "mg/dl") = 1
+    set ratio("creatinine", "umol/l") = 88.4
+    
+     // Cholesterol
+    // 1 mmol/L = 38.67 mg/dL
+    set ratio("cholesterol", "mg/dl") = 38.67
+    set ratio("cholesterol", "mmol/l") = 1
+    
+    return $$$OK
 }
 
-/// check if both units are valid glucose units
-ClassMethod IsGlucoseUnit(fromUnit As %String, toUnit As %String) As %Boolean
+/// Return list of supported test items and their unit
+ClassMethod GetSupportedTestItems() As %String
 {
-    // Supported glucose units
-    set glucoseUnits = $ListBuild("mg/dl","mmol/l")
+    do ..InitiallizeRatio(.ratio)
+    
+    set info = ""
+    set testItem = $Order(ratio(""))
 
-    // Check if both units are in the supported list
-    return ($ListFind(glucoseUnits, fromUnit) > 0) && ($ListFind(glucoseUnits, toUnit) > 0)
-}
+    // Build formatted string with supported tests and units
+    while (testItem '= "") {
+        if (info '= "") {
+            set info = info _ $Char(13,10)
+        }
+        
+        set info = info _ "• " _ testItem _ ": " //Add line break
 
-/// check if both units are valid creatinine units
-ClassMethod IsCreatinineUnit(fromUnit As %String, toUnit As %String) As %Boolean
-{
-    // Supported creatinine units
-    set creatinineUnits = $ListBuild("mg/dl","umol/l")
-
-    // Check if both units are in the supported list
-    return ($ListFind(creatinineUnits, fromUnit) > 0) && ($ListFind(creatinineUnits, toUnit) > 0)
+        set units = ""
+        set unit = $Order(ratio(testItem, ""))
+        
+        while (unit '= "") {
+            if (units '= "") {
+                set units = units _ ", "
+            }
+            set units = units _ unit
+            set unit = $Order(ratio(testItem, unit))
+        }
+        set info = info _ units
+        
+        set testItem = $Order(ratio(testItem))
+    }
+    
+    return info
 }
 
 }
