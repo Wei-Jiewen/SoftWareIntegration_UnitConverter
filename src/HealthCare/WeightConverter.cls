@@ -1,10 +1,8 @@
 Class HealthCare.WeightConverter
 {
 
-/// Summary: Class for converting weight units in healthcare context
+/// Class for converting weight units in healthcare context
 /// g, kg, mg, lb, oz
-///    set result = ##class(HealthCare.WeightConverter).ConvertWeight(150, "lb", "kg")
-///    write result  ; Output: 68.0388
 ClassMethod Convert(value As %String, fromUnit As %String, toUnit As %String) As %String
 {
     set numericValue = +value

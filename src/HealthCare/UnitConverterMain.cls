@@ -4,7 +4,7 @@ Class HealthCare.UnitConverterMain
 /// Main class for unit conversion in healthcare context
 /// category: length, weight, temperature, lab
 /// Routes conversion requests to specialized classes based on the category
-/// Default precision is 2 ,rang:0-10
+/// Default precision is 2 ,range:0-10
 /// To convert category "lab", need to input testItem (glucose,creatinine,cholesterol)
 /// Example usage:
 ///    set result = ##class(HealthCare.UnitConverterMain).Convert(100, "cm", "m", "length")

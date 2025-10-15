@@ -6,9 +6,6 @@ Class HealthCare.LabConverter
 /// - Glucose: mg/d <-> mmol/
 /// - Creatinine: mg/d <-> µmol/
 /// - Cholesterol：mg/d <-> mmol/
-/// Example usage:
-///    set result = ##class(HealthCare.LabConverter).Convert(100, "mg/dl", "mmol/l","glucose")
-///    write result; Output: 5.549943945566149782
 ClassMethod Convert(value As %String, fromUnit As %String, toUnit As %String, testItem As %String) As %String
 {
     // Check if testItem is provided

@@ -3,9 +3,6 @@ Class HealthCare.LengthConverter
 
 /// Convert length between various units
 /// mm, cm, m, um, in, ft, yd
-/// Example usage:
-///    set result = ##class(HealthCare.LengthConverter).ConvertLength(100, "cm", "m")
-///    write result ; Output: 1
 ClassMethod Convert(value As %String, fromUnit As %String, toUnit As %String) As %String
 {
     // Convert input value to numeric

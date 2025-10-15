@@ -3,9 +3,6 @@ Class HealthCare.TemperatureConverter
 
 /// convert temperature between Celsius, Fahrenheit, and Kelvin
 /// Supported units: "C", "F", "K"
-/// Example usage:
-///    set result = ##class(HealthCare.TemperatureConverter).ConvertTemperature(100, "c", "f")
-///    write result ; Output: 212
 ClassMethod Convert(value As %String, fromUnit As %String, toUnit As %String) As %String
 {
     set numericValue = +value
