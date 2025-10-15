@@ -5,14 +5,14 @@ Method TestLabConversions()
 {
     // Test glucose conversions
     set result = ##class(HealthCare.UnitConverterMain).Convert(180, "mg/dL", "mmol/L", "lab","glucose")
-    do $$$AssertEquals("9.99", result, "180 mg/dL should be approximately 10.00 mmol/L")
+    do $$$AssertEquals("9.99", result, "180 mg/dL should be approximately 9.99 mmol/L")
 
     set result = ##class(HealthCare.UnitConverterMain).Convert(5.5, "mmol/L", "mg/dL", "lab","glucose")
     do $$$AssertEquals("99.10", result, "10 mmol/L should be approximately 99.10 mg/dL")
 
      // Test Creatinine conversions
     set result = ##class(HealthCare.UnitConverterMain).Convert(1, "mg/dl", "umol/l", "lab", "creatinine")
-    do $$$AssertEquals("88.40", result, "1 mg/dL creatinine should be 88.4 µmol/L")
+    do $$$AssertEquals("88.40", result, "1 mg/dL creatinine should be 88.40 µmol/L")
 
     set result = ##class(HealthCare.UnitConverterMain).Convert(88.4, "umol/l", "mg/dl", "lab", "creatinine")
     do $$$AssertEquals("1.00", result, "88.4 µmol/L creatinine should be 1.00 mg/dL")
