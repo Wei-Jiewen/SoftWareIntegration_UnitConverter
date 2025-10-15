@@ -28,6 +28,16 @@ This project uses a controller-service architecture:
 - **Case Insensitive**: Unit and category names are case-insensitive
 - **Modular Design**: Easy to extend with new conversion categories
 
+## Supported Categories
+
+- **Length**: m, cm, mm, in, ft, yd
+- **Weight**: kg, g, mg, lb, oz  
+- **Temperature**: c, f, k
+- **Lab Tests**:
+  - Glucose: mg/dL ↔ mmol/L
+  - Creatinine: mg/dL ↔ μmol/L
+  - Cholesterol: mg/dL ↔ mmol/L
+
 ## Usage Example
 
 ```objectscript
@@ -47,12 +57,3 @@ write result // Output: "1.0012"
 set info = ##class(HealthCare.UnitConverterMain).GetConversionInfo()
 write info 
 
-## Supported Categories
-
-- **Length**: m, cm, mm, in, ft, yd
-- **Weight**: kg, g, mg, lb, oz  
-- **Temperature**: c, f, k
-- **Lab Tests**:
-  - Glucose: mg/dL ↔ mmol/L
-  - Creatinine: mg/dL ↔ μmol/L
-  - Cholesterol: mg/dL ↔ mmol/L
