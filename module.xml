@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25">
+  <Document name="SoftWareIntegration-UnitConverter.ZPM">
+    <Module>
+      <Name>SoftWareIntegration-UnitConverter</Name>
+      <Version>1.0.0</Version>
+      <Description>Healthcare Unit Converter for InterSystems IRIS - Converts length, weight, temperature, and lab test units</Description>
+      <Keywords>healthcare, unit converter, medical, lab tests</Keywords>
+      <Packaging>module</Packaging>
+      
+      <SourcesRoot>src</SourcesRoot>
+      
+      <Resource Name="HealthCare.PKG"/>
+      
+      <UnitTest Phase="test">
+        <Package>HealthCare.Tests</Package>
+      </UnitTest>
+    </Module>
+  </Document>
+</Export>
