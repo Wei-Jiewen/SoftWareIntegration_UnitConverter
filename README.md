@@ -57,3 +57,35 @@ write result // Output: "1.0012"
 set info = ##class(HealthCare.UnitConverterMain).GetConversionInfo()
 write info 
 
+## Installation
+
+1) Management Portal / Class Editor
+  - Open the Class Editor or navigate to the import tools in the Management Portal and compile the classes from `src/HealthCare`.
+  - Make sure you are looking into the Database instead of Namespace
+  - ![alt text](image.png)
+
+2) ZPM
+  - Make sure you have ZPM installed
+  - In IRIS terminal switch to Package Manager Shell (ZPM) by typing zpm
+  - You should see the following:
+    USER>zpm
+    =============================================================================
+    || Welcome to the Package Manager Shell (ZPM). Version: 0.10.4             ||
+    || Enter q/quit to exit the shell. Enter ?/help to view available commands ||
+    || No registry configured                                                  ||
+    || System Mode: <unset>                                                    ||
+    || Mirror Status: NOTINIT                                                  ||
+    =============================================================================
+    IRIS for Windows (x86-64) 2025.1 (Build 230.2U) Wed Jun 4 2025 18:53:21 EDT []
+    zpm:USER>
+
+  - Load the correct directory 
+    zpm:USER>load C:\to\your\path\SoftWareIntegration_UnitConverter
+  - Compile the module
+    zpm:USER>SoftWareIntegration-UnitConverter compile
+  - Test the module 
+    zpm:USER>SoftWareIntegration-UnitConverter test
+  - You can view the module info, it should appear as softwareintegration-unitconverter 1.0.0
+    zpm:USER>list
+  - Verify installation
+    zpm:USER>SoftWareIntegration-UnitConverter verify
