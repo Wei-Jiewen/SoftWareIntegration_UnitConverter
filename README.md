@@ -57,13 +57,22 @@ This project uses a controller-service architecture:
     zpm:USER>load C:\to\your\path\SoftWareIntegration_UnitConverter
     ```
   - Compile the module
+    ```
     zpm:USER>SoftWareIntegration-UnitConverter compile
+    ```
   - Test the module 
+    ```
     zpm:USER>SoftWareIntegration-UnitConverter test
-  - You can view the module info, it should appear as softwareintegration-unitconverter 1.0.0
+    ```
+  - You can view the module info, it should appear as 
+    ```
     zpm:USER>list
+    softwareintegration-unitconverter 1.0.0
+    ```
   - Verify installation
+    ```
     zpm:USER>SoftWareIntegration-UnitConverter verify
+    ```
 
 ## Usage Example
 
