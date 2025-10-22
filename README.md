@@ -45,6 +45,17 @@ This project uses a controller-service architecture:
   - Make sure you are looking into the Database instead of Namespace
   ![alt text](image.png)
 
+  - Optionally, you can also load your classes into IRIS using the Terminal:
+    - Navigate to IRIS terminal
+    - Switch to your namespace (for example USER):
+    ```
+    zn "USER"
+    ```
+    - Compile all classes:
+    ```
+    do $system.OBJ.CompileAll()
+    ```
+
 2) **ZPM**
   - Make sure you have ZPM installed
   - In IRIS terminal switch to Package Manager Shell (ZPM) by typing `zpm`
