@@ -47,11 +47,15 @@ This project uses a controller-service architecture:
 
 2) **ZPM**
   - Make sure you have ZPM installed
-  - In IRIS terminal switch to Package Manager Shell (ZPM) by typing zpm
+  - In IRIS terminal switch to Package Manager Shell (ZPM) by typing `zpm`
+    ```
     USER>zpm
     zpm:USER>
+    ```
   - Load the correct directory 
+    ```
     zpm:USER>load C:\to\your\path\SoftWareIntegration_UnitConverter
+    ```
   - Compile the module
     zpm:USER>SoftWareIntegration-UnitConverter compile
   - Test the module 
