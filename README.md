@@ -40,12 +40,12 @@ This project uses a controller-service architecture:
 
 ## Installation
 
-1) Management Portal / Class Editor
+1) **Management Portal / Class Editor**
   - Open the Class Editor or navigate to the import tools in the Management Portal and compile the classes from `src/HealthCare`.
   - Make sure you are looking into the Database instead of Namespace
-  - ![alt text](image.png)
+  ![alt text](image.png)
 
-2) ZPM
+2) **ZPM**
   - Make sure you have ZPM installed
   - In IRIS terminal switch to Package Manager Shell (ZPM) by typing zpm
     USER>zpm
@@ -79,3 +79,4 @@ write result // Output: "1.0012"
 // Get conversion information
 set info = ##class(HealthCare.UnitConverterMain).GetConversionInfo()
 write info
+´´´
