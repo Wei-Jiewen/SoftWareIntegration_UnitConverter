@@ -48,18 +48,8 @@ This project uses a controller-service architecture:
 2) ZPM
   - Make sure you have ZPM installed
   - In IRIS terminal switch to Package Manager Shell (ZPM) by typing zpm
-  - You should see the following:
     USER>zpm
-    =============================================================================
-    || Welcome to the Package Manager Shell (ZPM). Version: 0.10.4             ||
-    || Enter q/quit to exit the shell. Enter ?/help to view available commands ||
-    || No registry configured                                                  ||
-    || System Mode: <unset>                                                    ||
-    || Mirror Status: NOTINIT                                                  ||
-    =============================================================================
-    IRIS for Windows (x86-64) 2025.1 (Build 230.2U) Wed Jun 4 2025 18:53:21 EDT []
     zpm:USER>
-
   - Load the correct directory 
     zpm:USER>load C:\to\your\path\SoftWareIntegration_UnitConverter
   - Compile the module
@@ -70,7 +60,7 @@ This project uses a controller-service architecture:
     zpm:USER>list
   - Verify installation
     zpm:USER>SoftWareIntegration-UnitConverter verify
-    
+
 ## Usage Example
 
 ```objectscript
