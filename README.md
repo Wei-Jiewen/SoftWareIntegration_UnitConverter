@@ -38,25 +38,6 @@ This project uses a controller-service architecture:
   - Creatinine: mg/dL ↔ μmol/L
   - Cholesterol: mg/dL ↔ mmol/L
 
-## Usage Example
-
-```objectscript
-// Basic usage 1, category "lab", default 2 decimal places
-set result = ##class(HealthCare.UnitConverterMain).Convert(180, "mg/dL", "mmol/L", "lab", "glucose")
-write result  // Output: "9.99"
-
-// Basic usage, default 2 decimal places
-set result = ##class(HealthCare.UnitConverterMain).Convert(39.370079, "in", "m", "length")
-write result // Output: "1.00"
-
-// Basic usage,  4 dicimals
-set result = ##class(HealthCare.UnitConverterMain).Convert(100.12345, "cm", "m", "length", "", 4)
-write result // Output: "1.0012"
-
-// Get conversion information
-set info = ##class(HealthCare.UnitConverterMain).GetConversionInfo()
-write info´´´
-
 ## Installation
 
 1) Management Portal / Class Editor
@@ -89,3 +70,22 @@ write info´´´
     zpm:USER>list
   - Verify installation
     zpm:USER>SoftWareIntegration-UnitConverter verify
+    
+## Usage Example
+
+```objectscript
+// Basic usage 1, category "lab", default 2 decimal places
+set result = ##class(HealthCare.UnitConverterMain).Convert(180, "mg/dL", "mmol/L", "lab", "glucose")
+write result  // Output: "9.99"
+
+// Basic usage, default 2 decimal places
+set result = ##class(HealthCare.UnitConverterMain).Convert(39.370079, "in", "m", "length")
+write result // Output: "1.00"
+
+// Basic usage,  4 dicimals
+set result = ##class(HealthCare.UnitConverterMain).Convert(100.12345, "cm", "m", "length", "", 4)
+write result // Output: "1.0012"
+
+// Get conversion information
+set info = ##class(HealthCare.UnitConverterMain).GetConversionInfo()
+write info
