@@ -12,9 +12,7 @@
       
       <Resource Name="HealthCare.PKG"/>
       
-      <UnitTest Phase="test">
-        <Package>HealthCare.Tests</Package>
-      </UnitTest>
+      <UnitTest Name="\src" Package="HealthCare.Tests" Phase="test"/>
     </Module>
   </Document>
 </Export>
